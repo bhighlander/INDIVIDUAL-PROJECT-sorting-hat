@@ -3,26 +3,22 @@ const students = [
     name: "Jacen",
     discipline: "ataru",
     expelled: false,
-  
-},
+  },
   {
-  name: "Jaina",
-  discipline: "makashi",
-  expelled: false,
-
-},
+    name: "Jaina",
+    discipline: "makashi",
+    expelled: false,
+  },
   {
-  name: "Ben",
-  discipline: "sokan",
-  expelled: false,
-
-},
+    name: "Ben",
+    discipline: "sokan",
+    expelled: false,
+  },
   {
-  name: "Anakin",
-  dicipline: "vaapad",
-  expelled: false,
-
-},
+    name: "Anakin",
+    discipline: "vaapad",
+    expelled: false,
+  },
 ];
 
 // render to dom utility function
@@ -30,42 +26,56 @@ const renderToDom = (divId, textToRender) => {
   const selectedElement = document.querySelector(divId);
   selectedElement.innerHTML = textToRender;
 };
-  
 
+// HTML COMPONENT FUNCTIONS //
 
-  // HTML COMPONENT FUNCTIONS //
-  
+//----------------
+//IMPLEMENT LAST
+//Default card
 
+//   const defaultCard = () => {
+//     const domString = `<div class="card">
+//     <div class="card-header">
+//       Featured
+//     </div>
+//     <div class="card-body">
+//       <h5 class="card-title">Special title treatment</h5>
+//       <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+//       <button class="btn btn-primary" id="start">Hit it!</button>
+//     </div>
+//   </div>`;
+//   renderToDom("#defaultCard", domString);
+//   };
 
-  //Default card
+//   // Initialize button
+//  const start = document.querySelector("start");
+//   start.addEventListener("click", (e) => {
+//     if (e.target.id.includes("start")){
+//       renderToDom("#sortForm", sortForm);
+//     }
+//   }
 
-  const defaultCard = () => {
-    const domString = `<div class="card">
-    <div class="card-header">
-      Featured
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">Special title treatment</h5>
-      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
-  </div>`;
-  renderToDom("#defaultCard", domString);
-  };
+//   )
 
-  //Add student form
-/* <form>
+//----------------
+
+//Add student form
+const sortForm = () => {
+  const domString = "";
+  `<form>
   <div class="mb-3">    
   <div id="emailHelp" class="form-text">Enter student name.</div>
     <label for="exampleInputEmail1" class="form-label">Student Name</label>
     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
   </div>
     <button type="submit" class="btn btn-primary">Submit</button>
-</form> */
+</form>`;
+  renderToDom("#sortForm", domString);
+};
 
-  //Sort buttons
-  const sortButtons = () => {
-    const domString = `
+//Sort buttons
+const sortButtons = () => {
+  const domString = `
     <div class="d-flex flex-wrap justify-content-between my-3">
       <button class="btn btn-secondary btn-lg buttonRow" id="All">All</button>
       <button class="btn btn-secondary btn-lg buttonRow" id="ataru">Ataru</button>
@@ -74,11 +84,35 @@ const renderToDom = (divId, textToRender) => {
       <button class="btn btn-secondary btn-lg buttonRow" id="vaapad">Vaapad</button>
     </div>
     `;
-    renderToDom("#sortBtn", domString);
+  renderToDom("#sortBtn", domString);
+};
+
+
+document.querySelector("#sortBtn").addEventListener("click", (e) => {
+  console.log("filter button", e.target.id);
+
+  const filter = (filterString) => {
+    const newDataArray = students.filter(
+      (students) => students.discipline === filterString
+    );
+    studentCard(newDataArray);
   };
 
-  //Student cards
- const studentCard = (students) => {
+  if (e.target.id === "all") {
+    studentCard(students);
+  } else if (e.target.id === "ataru") {
+    filter("ataru");
+  } else if (e.target.id === "makashi") {
+    filter("makashi");
+  } else if (e.target.id === "sokan") {
+    filter("sokan");
+  } else if (e.target.id === "vaapad") {
+    filter("vaapad");
+  }
+});
+
+//Student cards
+const studentCard = (students) => {
   let domString = "";
   for (const student of students) {
     domString += `
@@ -93,18 +127,25 @@ const renderToDom = (divId, textToRender) => {
     `;
   }
   renderToDom("#students", domString);
- };
+};
 
-  //Expelled cards
+//Expelled cards
+const expel = () => {
+ const domString = `<h3>The Dark Side</h3>`;
+  renderToDom("#expel", domString);
+};
 
 
-  // EVENT LISTENERS //
+// EVENT LISTENERS //
 
-
-  //STARTAPP//
+//STARTAPP//
 const startApp = () => {
-  defaultCard();
-  console.log(defaultCard);
+  // defaultCard();
+  // console.log(defaultCard);
+  sortForm();
+  sortButtons();
+  studentCard(students);
+  expel();
 };
 
 startApp();
