@@ -1,3 +1,24 @@
 div {
   border: 1 solid black;
 }
+
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.allStudents {
+  display: flex;
+  flex-direction: row;
+  flex-basis: 30%;
+  width: 50%;
+  margin: 2rem;
+}
+
+#students #expel {
+  /* flex-direction: row; */
+  flex-wrap: wrap;
+  padding: 10rem;
+  width: 50%;
+}

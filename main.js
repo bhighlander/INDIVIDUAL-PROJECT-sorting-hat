@@ -1,22 +1,26 @@
 const students = [
   {
+    id: 1,
     name: "Jacen",
-    discipline: "ataru",
+    discipline: "Ataru",
     expelled: false,
   },
   {
+    id: 2,
     name: "Jaina",
-    discipline: "makashi",
+    discipline: "Makashi",
     expelled: false,
   },
   {
+    id: 3,
     name: "Ben",
-    discipline: "sokan",
+    discipline: "Sokan",
     expelled: false,
   },
   {
+    id: 4,
     name: "Anakin",
-    discipline: "vaapad",
+    discipline: "Vaapad",
     expelled: false,
   },
 ];
@@ -30,98 +34,127 @@ const renderToDom = (divId, textToRender) => {
 // HTML COMPONENT FUNCTIONS //
 
 //----------------
-//IMPLEMENT LAST
 //Default card
 
-//   const defaultCard = () => {
-//     const domString = `<div class="card">
-//     <div class="card-header">
-//       Featured
-//     </div>
-//     <div class="card-body">
-//       <h5 class="card-title">Special title treatment</h5>
-//       <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-//       <button class="btn btn-primary" id="start">Hit it!</button>
-//     </div>
-//   </div>`;
-//   renderToDom("#defaultCard", domString);
-//   };
+const defaultCard = () => {
+  const domString = `<div class="card">
+     <div class="card-body">
+      <h5 class="card-title">Welcome to the Jedi Academy</h5>
+      <p class="card-text">Click to continue your enrollment.</p>
+      <button class="btn btn-primary" id="start">Hit it!</button>
+    </div>
+  </div>`;
+  renderToDom("#defaultCard", domString);
+};
 
-//   // Initialize button
-//  const start = document.querySelector("start");
-//   start.addEventListener("click", (e) => {
-//     if (e.target.id.includes("start")){
-//       renderToDom("#sortForm", sortForm);
-//     }
-//   }
+// Initialize button
+const start = document.querySelector("start");
+document.addEventListener("click", (e) => {
+  if (e.target.id.includes("start")) {
+    sortForm();
+    sortButtons();
+    studentCard(students);
+    expelledStudents();
+    document.getElementById("defaultCard").style.display = "none";
+    // document.getElementById("#defaultCard").style.display = "none";
+  }
 
-//   )
+});
+
+
 
 //----------------
 
 //Add student form
 const sortForm = () => {
-  const domString = "";
-  `<form>
-  <div class="mb-3">    
-  <div id="emailHelp" class="form-text">Enter student name.</div>
-    <label for="exampleInputEmail1" class="form-label">Student Name</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-  </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+  const domString = `<form>
+  <div id="textHelp" class="form-text">Enter student name.</div>    
+  <div class="form-floating form-control-sm mb-3">
+        <input type="text" class="form-control" id="name" aria-describedby="textHelp" required>
+        <label for="exampleFormControlInput1" class="form-label">Name</label>
+    <button type="submit" class="btn btn-primary" id="subBtn">Submit</button>
 </form>`;
   renderToDom("#sortForm", domString);
 };
+
+//Add student function
+const form = document.querySelector("form");
+document.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const disciplines = ["Ataru", "Makashi", "Sokan", "Vaapad"];
+  const randomIndex = Math.floor(Math.random() * disciplines.length);
+  const randomDiscipline = disciplines[randomIndex];
+
+  const newStudent = {
+    id: students.length + 1,
+    name: document.querySelector("#name").value,
+    discipline: randomDiscipline,
+    expelled: false,
+  };
+  students.unshift(newStudent);
+  studentCard(students);
+  form.reset(); //<------ come back
+ });
 
 //Sort buttons
 const sortButtons = () => {
   const domString = `
     <div class="d-flex flex-wrap justify-content-between my-3">
-      <button class="btn btn-secondary btn-lg buttonRow" id="All">All</button>
-      <button class="btn btn-secondary btn-lg buttonRow" id="ataru">Ataru</button>
-      <button class="btn btn-secondary btn-lg buttonRow" id="makashi">Makashi</button>
-      <button class="btn btn-secondary btn-lg buttonRow" id="sokan">Sokan</button>
-      <button class="btn btn-secondary btn-lg buttonRow" id="vaapad">Vaapad</button>
+      <button class="btn btn-secondary btn-lg buttonRow" id="all">All</button>
+      <button class="btn btn-secondary btn-lg buttonRow" id="Ataru">Ataru</button>
+      <button class="btn btn-secondary btn-lg buttonRow" id="Makashi">Makashi</button>
+      <button class="btn btn-secondary btn-lg buttonRow" id="Sokan">Sokan</button>
+      <button class="btn btn-secondary btn-lg buttonRow" id="Vaapad">Vaapad</button>
     </div>
     `;
   renderToDom("#sortBtn", domString);
 };
 
-
 document.querySelector("#sortBtn").addEventListener("click", (e) => {
   console.log("filter button", e.target.id);
 
   const filter = (filterString) => {
-    const newDataArray = students.filter(
-      (students) => students.discipline === filterString
+    const newStudentArray = students.filter(
+      (students) =>
+        students.discipline === filterString && students.expelled === false
     );
-    studentCard(newDataArray);
+    studentCard(newStudentArray);
   };
 
   if (e.target.id === "all") {
     studentCard(students);
-  } else if (e.target.id === "ataru") {
-    filter("ataru");
-  } else if (e.target.id === "makashi") {
-    filter("makashi");
-  } else if (e.target.id === "sokan") {
-    filter("sokan");
-  } else if (e.target.id === "vaapad") {
-    filter("vaapad");
+    document.getElementById("expel").style.display = "";
+  } else if (e.target.id === "Ataru") {
+    filter("Ataru");
+    hideExpelled();
+  } else if (e.target.id === "Makashi") {
+    filter("Makashi");
+    hideExpelled();
+  } else if (e.target.id === "Sokan") {
+    filter("Sokan");
+    hideExpelled();
+  } else if (e.target.id === "Vaapad") {
+    filter("Vaapad");
+    hideExpelled();
   }
 });
 
+//Function to hide expelled students cards
+const hideExpelled = () => {
+document.getElementById("expel").style.display = "none";
+}
 //Student cards
 const studentCard = (students) => {
-  let domString = "";
-  for (const student of students) {
+  let domString = "<h3>Padawans</h3>";
+  const notExpelled = students.filter((student) => !student.expelled);
+  for (const student of notExpelled) {
     domString += `
     <div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">${student.name}</h5>
-    <p class="card-text">${student.dicipline}</p>
-    <a href="#" class="btn btn-primary">Expel</a>
+    <p class="card-text">${student.discipline}</p>
+    <a href="#" class="btn btn-primary" id="expel--${student.id}">Expel</a>
   </div>
 </div>
     `;
@@ -129,23 +162,42 @@ const studentCard = (students) => {
   renderToDom("#students", domString);
 };
 
+//Expel button
+document.addEventListener("click", (e) => {
+  if (e.target.id.includes("expel")) {
+    const [, studentId] = e.target.id.split("--");
+    const studentIndex = students.findIndex(
+      (obj) => obj.id === Number(studentId)
+    );
+    if (studentIndex !== -1) {
+      students[studentIndex].expelled = true;
+    }
+    studentCard(students);
+    expelledStudents(students);
+    console.log(students);
+  }
+});
+
 //Expelled cards
-const expel = () => {
- const domString = `<h3>The Dark Side</h3>`;
+const expelledStudents = () => {
+  let domString = "<h3>The Dark Side</h3>";
+  const isExpelled = students.filter((student) => student.expelled);
+  for (const student of isExpelled) {
+    domString += `
+    <div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">${student.name}</h5>
+    <p class="card-text">${student.discipline}</p>
+  </div>
+</div>
+    `;
+  }
   renderToDom("#expel", domString);
 };
 
-
-// EVENT LISTENERS //
-
 //STARTAPP//
 const startApp = () => {
-  // defaultCard();
-  // console.log(defaultCard);
-  sortForm();
-  sortButtons();
-  studentCard(students);
-  expel();
+  defaultCard();
 };
 
 startApp();
