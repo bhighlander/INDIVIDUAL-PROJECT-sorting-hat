@@ -17,8 +17,14 @@ div {
 }
 
 #students #expel {
-  /* flex-direction: row; */
+  font-size: 10rem;
   flex-wrap: wrap;
   padding: 10rem;
   width: 50%;
+}
+
+.studentCard .expelCard {
+  flex-wrap: wrap;
+  flex-basis: auto;
+  background-color: aquamarine;
 }

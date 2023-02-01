@@ -56,12 +56,8 @@ document.addEventListener("click", (e) => {
     studentCard(students);
     expelledStudents();
     document.getElementById("defaultCard").style.display = "none";
-    // document.getElementById("#defaultCard").style.display = "none";
   }
-
 });
-
-
 
 //----------------
 
@@ -94,8 +90,8 @@ document.addEventListener("submit", (e) => {
   };
   students.unshift(newStudent);
   studentCard(students);
-  form.reset(); //<------ come back
- });
+  form.reset();
+});
 
 //Sort buttons
 const sortButtons = () => {
@@ -142,8 +138,9 @@ document.querySelector("#sortBtn").addEventListener("click", (e) => {
 
 //Function to hide expelled students cards
 const hideExpelled = () => {
-document.getElementById("expel").style.display = "none";
-}
+  document.getElementById("expel").style.display = "none";
+};
+
 //Student cards
 const studentCard = (students) => {
   let domString = "<h3>Padawans</h3>";
