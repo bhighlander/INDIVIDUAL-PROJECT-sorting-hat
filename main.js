@@ -71,7 +71,7 @@ const sortForm = () => {
     <button type="submit" class="btn btn-primary" id="subBtn">Submit</button>
 </form>`;
   renderToDom("#sortForm", domString);
-};
+
 
 //Add student function
 const form = document.querySelector("form");
@@ -92,6 +92,7 @@ document.addEventListener("submit", (e) => {
   studentCard(students);
   form.reset();
 });
+};
 
 //Sort buttons
 const sortButtons = () => {
