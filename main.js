@@ -68,36 +68,35 @@ const sortForm = () => {
   <div class="form-floating form-control-sm mb-3">
         <input type="text" class="form-control" id="name" aria-describedby="textHelp" required>
         <label for="exampleFormControlInput1" class="form-label">Name</label>
-    <button type="submit" class="btn btn-primary" id="subBtn">Submit</button>
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>`;
   renderToDom("#sortForm", domString);
 
+  //Add student function
+  const form = document.querySelector("form");
+  document.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-//Add student function
-const form = document.querySelector("form");
-document.addEventListener("submit", (e) => {
-  e.preventDefault();
+    const disciplines = ["Ataru", "Makashi", "Sokan", "Vaapad"];
+    const randomIndex = Math.floor(Math.random() * disciplines.length);
+    const randomDiscipline = disciplines[randomIndex];
 
-  const disciplines = ["Ataru", "Makashi", "Sokan", "Vaapad"];
-  const randomIndex = Math.floor(Math.random() * disciplines.length);
-  const randomDiscipline = disciplines[randomIndex];
-
-  const newStudent = {
-    id: students.length + 1,
-    name: document.querySelector("#name").value,
-    discipline: randomDiscipline,
-    expelled: false,
-  };
-  students.unshift(newStudent);
-  studentCard(students);
-  form.reset();
-});
+    const newStudent = {
+      id: students.length + 1,
+      name: document.querySelector("#name").value,
+      discipline: randomDiscipline,
+      expelled: false,
+    };
+    students.unshift(newStudent);
+    studentCard(students);
+    form.reset();
+  });
 };
 
 //Sort buttons
 const sortButtons = () => {
   const domString = `
-    <div class="d-flex flex-wrap justify-content-between my-3">
+    <div class="button-row">
       <button class="btn btn-secondary btn-lg buttonRow" id="all">All</button>
       <button class="btn btn-secondary btn-lg buttonRow" id="Ataru">Ataru</button>
       <button class="btn btn-secondary btn-lg buttonRow" id="Makashi">Makashi</button>
@@ -144,20 +143,21 @@ const hideExpelled = () => {
 
 //Student cards
 const studentCard = (students) => {
-  let domString = "<h3>Padawans</h3>";
+  let domString = "";
   const notExpelled = students.filter((student) => !student.expelled);
   for (const student of notExpelled) {
     domString += `
-    <div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">${student.name}</h5>
+ <div class="student-div">
+  <div class="card-body" id="student-card">
+    
+  <img src="jedi-order.png" width="50px" height="auto"><h5 class="card-title">${student.name}</h5>
     <p class="card-text">${student.discipline}</p>
-    <a href="#" class="btn btn-primary" id="expel--${student.id}">Expel</a>
-  </div>
+    <a href="#" class="btn btn-primary expel-btn" id="expel--${student.id}">Expel</a>
+</div>
 </div>
     `;
   }
-  renderToDom("#students", domString);
+  renderToDom(".students", domString);
 };
 
 //Expel button
@@ -178,19 +178,19 @@ document.addEventListener("click", (e) => {
 
 //Expelled cards
 const expelledStudents = () => {
-  let domString = "<h3>The Dark Side</h3>";
+  let domString = "";
   const isExpelled = students.filter((student) => student.expelled);
   for (const student of isExpelled) {
-    domString += `
-    <div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">${student.name}</h5>
+    domString += `<div class="expel-div">
+    <div class="card-body expel-div" id="expel-card">
+    <img src="sith-empire-logo.png" width="50px" height="auto">
+    <h5 class="card-title">${student.name} fell to the Dark Side</h5>
     <p class="card-text">${student.discipline}</p>
-  </div>
+</div>
 </div>
     `;
   }
-  renderToDom("#expel", domString);
+  renderToDom(".expel", domString);
 };
 
 //STARTAPP//
