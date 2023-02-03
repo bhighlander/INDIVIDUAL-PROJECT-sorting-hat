@@ -109,7 +109,7 @@ const sortForm = () => {
 const sortButtons = () => {
   const domString = `
     <div class="button-row">
-      <button class="btn btn-secondary btn-lg buttonRow" id="all">All</button>
+      <button class="btn btn-secondary btn-lg " id="all">All</button>
       <button class="btn btn-secondary btn-lg buttonRow" id="Ataru">Ataru</button>
       <button class="btn btn-secondary btn-lg buttonRow" id="Makashi">Makashi</button>
       <button class="btn btn-secondary btn-lg buttonRow" id="Sokan">Sokan</button>
@@ -157,6 +157,7 @@ const hideExpelled = () => {
 const studentCard = (students) => {
   let domString = "";
   const notExpelled = students.filter((student) => !student.expelled);
+
   for (const student of notExpelled) {
     domString += `
  <div class="student-div">

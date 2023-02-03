@@ -6,8 +6,11 @@ Greeted with an instructional card with a start button
 You can view current students, add a new one, and expel students from the school
 You can then sort through students who are not expelled by discipline
 
+##Site Link
+https://bch-sorting-hat-project.netlify.app/
+
 ##Video Walkthrough
-https://loom.com/share/96e38c095d144475ba3ae921c762a11e
+https://www.loom.com/share/b825f3eeab2c4e8099bfe4cd0dbe0cfe
 
 #Contributors
 [Brandon Highland] (https://github.com/bhighlander)
