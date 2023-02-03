@@ -4,24 +4,28 @@ const students = [
     name: "Jacen",
     discipline: "Ataru",
     expelled: false,
+    backgroundcolor: "#3164F0",
   },
   {
     id: 2,
     name: "Jaina",
     discipline: "Makashi",
     expelled: false,
+    backgroundcolor: "#01F00F",
   },
   {
     id: 3,
     name: "Ben",
     discipline: "Sokan",
     expelled: false,
+    backgroundcolor: "#EBE403",
   },
   {
     id: 4,
     name: "Anakin",
     discipline: "Vaapad",
     expelled: false,
+    backgroundcolor: "#CE09E0",
   },
 ];
 
@@ -38,7 +42,7 @@ const renderToDom = (divId, textToRender) => {
 
 const defaultCard = () => {
   const domString = `<div class="card">
-     <div class="card-body">
+     <div class="card-body default-card">
       <h5 class="card-title">Welcome to the Jedi Academy</h5>
       <p class="card-text">Click to continue your enrollment.</p>
       <button class="btn btn-primary" id="start">Hit it!</button>
@@ -81,10 +85,18 @@ const sortForm = () => {
     const randomIndex = Math.floor(Math.random() * disciplines.length);
     const randomDiscipline = disciplines[randomIndex];
 
+    const disciplineColors = {
+      Ataru: "#3164F0",
+      Makashi: "#01F00F",
+      Sokan: "#EBE403",
+      Vaapad: "#CE09E0"
+    };
+
     const newStudent = {
       id: students.length + 1,
       name: document.querySelector("#name").value,
       discipline: randomDiscipline,
+      backgroundcolor: disciplineColors[randomDiscipline],
       expelled: false,
     };
     students.unshift(newStudent);
@@ -148,7 +160,7 @@ const studentCard = (students) => {
   for (const student of notExpelled) {
     domString += `
  <div class="student-div">
-  <div class="card-body" id="student-card">
+  <div class="card-body" id="student-card" style="background-color:${student.backgroundcolor}">
     
   <img src="jedi-order.png" width="50px" height="auto"><h5 class="card-title">${student.name}</h5>
     <p class="card-text">${student.discipline}</p>

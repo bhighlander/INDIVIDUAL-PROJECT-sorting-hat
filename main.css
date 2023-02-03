@@ -1,5 +1,5 @@
-div {
-  border: 1 solid black;
+body, .default-card {
+  background-color: gray;
 }
 
 .container {
@@ -22,8 +22,7 @@ div {
   margin: 1rem;
   width: 10rem;
   height: 10rem;
-  flex-basis: 0;
-  text-align: ;
+  flex-basis: 0; 
 }
 
 .button-row {
