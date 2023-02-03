@@ -89,7 +89,7 @@ const sortForm = () => {
       Ataru: "#3164F0",
       Makashi: "#01F00F",
       Sokan: "#EBE403",
-      Vaapad: "#CE09E0"
+      Vaapad: "#CE09E0",
     };
 
     const newStudent = {
