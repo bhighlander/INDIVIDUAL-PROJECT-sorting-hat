@@ -1,6 +1,20 @@
 body, .default-card {
-  background-color: gray;
+  background-color: #61A6AB;
 }
+
+@font-face {
+  font-family: 'Aurebesh';
+  src:url('Aurebesh.ttf.woff') format('woff'),
+      url('Aurebesh.ttf.svg#Aurebesh') format('svg'),
+      url('Aurebesh.ttf.eot'),
+      url('Aurebesh.ttf.eot?#iefix') format('embedded-opentype'); 
+  font-weight: normal;
+  font-style: normal;
+}
+
+#head, #intro { 
+  font-family: 'Aurebesh', Arial, Helvetica, sans-serif;
+}  
 
 .container {
   display: flex;
