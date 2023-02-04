@@ -59,6 +59,7 @@ document.addEventListener("click", (e) => {
     sortButtons();
     studentCard(students);
     expelledStudents();
+    document.getElementById("student-title").style.display = "flex";
     document.getElementById("defaultCard").style.display = "none";
   }
 });
@@ -153,10 +154,17 @@ const hideExpelled = () => {
   document.getElementById("expel").style.display = "none";
 };
 
+
+
 //Student cards
 const studentCard = (students) => {
   let domString = "";
   const notExpelled = students.filter((student) => !student.expelled);
+  notExpelled.sort((a, b) => {
+    if (a.name < b.name) return -1;
+    if (a.name > b.name) return 1;
+    return 0;
+  });
   for (const student of notExpelled) {
     domString += `
  <div class="student-div">
@@ -203,12 +211,6 @@ const expelledStudents = () => {
     `;
   }
   renderToDom(".expel", domString);
-};
-
-const titles = () => {
-  const domString = `<div><h3>Padawans</h3></div>
-  <div><h3>The Dark Side</h3></div>`;
-  renderToDom("titles", domString);
 };
 
 //STARTAPP//
