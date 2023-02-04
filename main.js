@@ -157,7 +157,6 @@ const hideExpelled = () => {
 const studentCard = (students) => {
   let domString = "";
   const notExpelled = students.filter((student) => !student.expelled);
-
   for (const student of notExpelled) {
     domString += `
  <div class="student-div">
@@ -204,6 +203,12 @@ const expelledStudents = () => {
     `;
   }
   renderToDom(".expel", domString);
+};
+
+const titles = () => {
+  const domString = `<div><h3>Padawans</h3></div>
+  <div><h3>The Dark Side</h3></div>`;
+  renderToDom("titles", domString);
 };
 
 //STARTAPP//
